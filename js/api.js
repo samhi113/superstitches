@@ -1,0 +1,1 @@
+export const API_PRIVATE_KEY = "AIzaSyDnyijf_FI63wvgIkANs5zZFt7MzH86xyQ";
