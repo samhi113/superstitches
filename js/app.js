@@ -1,4 +1,5 @@
-import { API_PRIVATE_KEY } from "./api.js";
+// import { API_PRIVATE_KEY } from "./api.js";
+const API_PRIVATE_KEY = process.env.API_PRIVATE_KEY;
 
 const data = document.getElementById("data");
 var sheet;
