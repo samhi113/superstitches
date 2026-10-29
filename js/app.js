@@ -32,7 +32,6 @@ async function getSpreadsheetValues(spreadsheetId, range, apiKey) {
   }
 }
 
-
 async function getSpreadsheetData(spreadsheetId, range, apiKey) {
   const encodedRange = encodeURIComponent(range);
   const fields = encodeURIComponent(
@@ -80,7 +79,6 @@ async function getSpreadsheetData(spreadsheetId, range, apiKey) {
   }
 }
 
-
 function displayStats(homeAway) {
     data.innerHTML = "";
 
@@ -94,23 +92,42 @@ function displayStats(homeAway) {
             
             newText += cell;
 
-            if (j === 0) {
-                newText += "</p><p>"
-            } else if (j % 2 === 0) {
-                newText += " "
-            } else {
-                newText += "-"
+            switch (j) {
+                case 0:
+                    newText += "</p><div class='records'><div class='home'><p>"
+                    break;
+                case 1:
+                    newText += "-"
+                    break;
+                case 2:
+                    newText += "</p><p>Home</p></div><div class='away'><p>"
+                    break;
+                case 3:
+                    newText += "-"
+                    break;
+                case 4:
+                    newText += "</p><p>Away</p></div><div class='overall'><p>"
+                    break;
+                case 5:
+                    newText += "-"
+                    break;
+                case 6:
+                    newText += "</p><p>Overall</p></div></div>"
+                    break;
+                default:
+                    break;
             }
         }
 
-        data.innerHTML += `<div class="row" style="background-color: ${colors[i][0]}; color: ${colors[i][1]}">` + newText + "</p></div>";
+        data.innerHTML += `<div class="row" style="background-color: ${colors[i][0]}; color: ${colors[i][1]}">` + newText + "</div>";
     }
 }
-getSpreadsheetData("1y1ehE1UxHhKoS3jI5_wHDEGw1ma-X68S_mpdYcMcmnQ", "Stats!B3:B8", API_PRIVATE_KEY)
+
+getSpreadsheetData("125NfCJlym_sgl7LG49j49EzqwPZJQeOB6p_3Kul83sk", "Stats!B3:B9", API_PRIVATE_KEY)
     .then( () => {
-getSpreadsheetValues("1y1ehE1UxHhKoS3jI5_wHDEGw1ma-X68S_mpdYcMcmnQ", "Stats", API_PRIVATE_KEY)
+getSpreadsheetValues("125NfCJlym_sgl7LG49j49EzqwPZJQeOB6p_3Kul83sk", "Stats", API_PRIVATE_KEY)
     .then( () => {
-            var pacersHomeAway = [sheet[2].slice(1, 8), sheet[3].slice(1, 8), sheet[4].slice(1, 8), sheet[5].slice(1, 8), sheet[6].slice(1, 8), sheet[7].slice(1, 8)];
+            var pacersHomeAway = [sheet[2].slice(1, 8), sheet[3].slice(1, 8), sheet[4].slice(1, 8), sheet[5].slice(1, 8), sheet[6].slice(1, 8), sheet[7].slice(1, 8), sheet[8].slice(1, 8)];
 
             console.log(sheet);
             console.log(pacersHomeAway);
