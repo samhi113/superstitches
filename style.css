@@ -19,11 +19,12 @@ body {
 
 nav {
   display: flex;
-  height: 15vh;
+  height: calc(5vw + 1em);
   padding: 1vh;
 
   .logo {
     display: flex;
+    font-size: calc(1.5vw + 0.25vh);
 
     img {
       min-width: 100px;
@@ -37,11 +38,13 @@ nav {
   }
 
   ul {
+    margin: 0;
     min-width: 40vw;
     height: 100%;
     list-style-type: none;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     li,
     li a {
@@ -49,6 +52,7 @@ nav {
       align-items: center;
       justify-content: center;
 
+      height: 1.75em;
       max-height: 7.5vh;
       min-width: 10vw;
       border-radius: 1000px;
@@ -91,13 +95,19 @@ select {
 
 .row {
   justify-content: space-between;
-  width: 35vw;
+  width: calc(20vw + 10em);
   padding: 1vh 2.5vw;
   margin: 1vw;
   border-radius: calc(1vh + 1vw);
 
+  h3 {
+    min-width: 8.1em;
+    margin: 0;
+  }
+
   p {
     margin: 0.25vh;
+    font-size: 0.8em;
     font-weight: bold;
   }
 }
@@ -111,6 +121,7 @@ select {
 .home,
 .away,
 .overall {
+  min-width: 2.5em;
   display: flex;
   flex-direction: column;
   align-items: center;

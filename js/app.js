@@ -89,14 +89,14 @@ function displayStats(homeAway, jerseyCount) {
 
         const row = homeAway[i];
 
-        let newText = "<p>";
+        let newText = "<h3>";
 
         row.forEach((cell, j) => {
             newText += cell ?? "";
 
             switch (j) {
                 case 0:
-                    newText += "</p><div class='records'><div class='home'><p>";
+                    newText += "</h3><div class='records'><div class='home'><p>";
                     break;
                 case 1:
                     newText += "-";
