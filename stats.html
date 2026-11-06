@@ -7,7 +7,53 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>SuperStitches</h1>
+    <nav>
+      <div class="logo">
+        <img src="public/superStitchesLogo.svg" alt="SuperStitches Logo" />
+        <h1>SuperStitches</h1>
+      </div>
+      <ul>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="standings.html">Standings</a></li>
+        <li><a href="stats.html">Stats</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p>Select a team:</p>
+      <select name="teamSelect" id="teamSelect">
+        <option value="Stats6" selected>Overall</option>
+        <option value="ATL5">Atlanta Hawks</option>
+        <option value="BOS5">Boston Celtics</option>
+        <option value="BKN5">Brooklyn Nets</option>
+        <option value="CHA4">Charlotte Hornets</option>
+        <option value="CHI4">Chicago Bulls</option>
+        <option value="CLE4">Cleveland Cavaliers</option>
+        <option value="DAL4">Dallas Mavericks</option>
+        <option value="DEN5">Denver Nuggets</option>
+        <option value="DET5">Detroit Pistons</option>
+        <option value="GSW5">Golden State Warriors</option>
+        <option value="HOU4">Houston Rockets</option>
+        <option value="IND5">Indiana Pacers</option>
+        <option value="LAC4">Los Angeles Clippers</option>
+        <option value="LAL5">Los Angeles Lakers</option>
+        <option value="MEM4">Memphis Grizzlies</option>
+        <option value="MIA4">Miami Heat</option>
+        <option value="MIL4">Milwaukee Bucks</option>
+        <option value="MIN4">Minnesota Timberwolves</option>
+        <option value="NOP4">New Orleans Pelicans</option>
+        <option value="NYK5">New York Knicks</option>
+        <option value="OKC4">Oklahoma City Thunder</option>
+        <option value="ORL4">Orlando Magic</option>
+        <option value="PHI5">Philadelphia 76ers</option>
+        <option value="PHX4">Phoenix Suns</option>
+        <option value="POR4">Portland Trail Blazers</option>
+        <option value="SAC5">Sacramento Kings</option>
+        <option value="SAS5">San Antonio Spurs</option>
+        <option value="TOR4">Toronto Raptors</option>
+        <option value="UTA4">Utah Jazz</option>
+        <option value="WAS4">Washington Wizards</option>
+      </select>
+    </div>
     <div id="data"></div>
     <script src="js/app.js" type="module"></script>
   </body>

@@ -1,6 +1,7 @@
 import { API_PRIVATE_KEY } from "./api.js";
 
 const data = document.getElementById("data");
+const teamSelect = document.getElementById("teamSelect");
 var sheet;
 const colors = [];
 
@@ -33,6 +34,8 @@ async function getSpreadsheetValues(spreadsheetId, range, apiKey) {
 }
 
 async function getSpreadsheetData(spreadsheetId, range, apiKey) {
+  colors.length = 0;
+
   const encodedRange = encodeURIComponent(range);
   const fields = encodeURIComponent(
     "sheets.data.rowData.values.userEnteredFormat(backgroundColor,textFormat.foregroundColor)"
@@ -79,59 +82,78 @@ async function getSpreadsheetData(spreadsheetId, range, apiKey) {
   }
 }
 
-function displayStats(homeAway) {
+function displayStats(homeAway, jerseyCount) {
     data.innerHTML = "";
 
-    for (let i = 0; i < homeAway.length; i++) {
-        var newText = "<p>";
+    for (let i = 0; i < Math.min(homeAway.length, jerseyCount); i++) {
 
         const row = homeAway[i];
-        
-        for (let j = 0; j < row.length; j++) {
-            const cell = row[j];
-            
-            newText += cell;
+
+        let newText = "<p>";
+
+        row.forEach((cell, j) => {
+            newText += cell ?? "";
 
             switch (j) {
                 case 0:
-                    newText += "</p><div class='records'><div class='home'><p>"
+                    newText += "</p><div class='records'><div class='home'><p>";
                     break;
                 case 1:
-                    newText += "-"
+                    newText += "-";
                     break;
                 case 2:
-                    newText += "</p><p>Home</p></div><div class='away'><p>"
+                    newText += "</p><p>Home</p></div><div class='away'><p>";
                     break;
                 case 3:
-                    newText += "-"
+                    newText += "-";
                     break;
                 case 4:
-                    newText += "</p><p>Away</p></div><div class='overall'><p>"
+                    newText += "</p><p>Away</p></div><div class='overall'><p>";
                     break;
                 case 5:
-                    newText += "-"
+                    newText += "-";
                     break;
                 case 6:
-                    newText += "</p><p>Overall</p></div></div>"
-                    break;
-                default:
+                    newText += "</p><p>Overall</p></div></div>";
                     break;
             }
-        }
+        });
 
-        data.innerHTML += `<div class="row" style="background-color: ${colors[i][0]}; color: ${colors[i][1]}">` + newText + "</div>";
+        const [background, foreground] = colors[i] ?? [
+            "rgb(255,255,255)",
+            "rgb(0,0,0)"
+        ];
+
+        data.innerHTML += `
+            <div class="row" style="
+                background-color: ${background};
+                color: ${foreground};
+            ">
+                ${newText}
+            </div>
+        `;
     }
 }
 
-getSpreadsheetData("125NfCJlym_sgl7LG49j49EzqwPZJQeOB6p_3Kul83sk", "Stats!B3:B9", API_PRIVATE_KEY)
-    .then( () => {
-getSpreadsheetValues("125NfCJlym_sgl7LG49j49EzqwPZJQeOB6p_3Kul83sk", "Stats", API_PRIVATE_KEY)
-    .then( () => {
-            var pacersHomeAway = [sheet[2].slice(1, 8), sheet[3].slice(1, 8), sheet[4].slice(1, 8), sheet[5].slice(1, 8), sheet[6].slice(1, 8), sheet[7].slice(1, 8), sheet[8].slice(1, 8)];
-
-            console.log(sheet);
-            console.log(pacersHomeAway);
-
-            displayStats(pacersHomeAway);
+function changeTeams(sheetName, jerseyCount) {
+  getSpreadsheetData("125NfCJlym_sgl7LG49j49EzqwPZJQeOB6p_3Kul83sk", `${sheetName}!B3:B${3 + jerseyCount}`, API_PRIVATE_KEY)
+      .then( () => {
+  getSpreadsheetValues("125NfCJlym_sgl7LG49j49EzqwPZJQeOB6p_3Kul83sk", `${sheetName}`, API_PRIVATE_KEY)
+      .then( () => {
+        var homeAway = [];
+        for (let i = 0; i < jerseyCount + 1; i++) {
+          homeAway.push(sheet[i+2].slice(1, 8));
         }
-)});
+        displayStats(homeAway, jerseyCount+1);
+      }
+  )});
+}
+
+teamSelect.addEventListener("change", (e) => {
+  var value = e.target.value;
+  var len = value.length - 1;
+
+  changeTeams(value.slice(0,len), parseInt(value.slice(len,)));
+})
+
+changeTeams("Stats", 6);
