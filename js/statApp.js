@@ -74,7 +74,7 @@ async function getSpreadsheetData(spreadsheetId, range, apiKey) {
       ]);
     });
 
-    console.log(colors);
+    // console.log(colors);
     return colors;
   } catch (error) {
     console.error(error);
