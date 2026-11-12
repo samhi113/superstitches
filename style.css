@@ -24,10 +24,10 @@ nav {
 
   .logo {
     display: flex;
-    font-size: calc(1.5vw + 0.25vh);
+    font-size: calc(0.5vw + 0.75em);
 
     img {
-      min-width: 100px;
+      min-width: 75px;
       width: 10vw;
       max-width: 300px;
 
